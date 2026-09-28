@@ -1,0 +1,63 @@
+! =====================================================================
+! SW-A - Switch Cisco IOL L2 - Infraestructura 1 (sitio Usuarios)
+! Jose Gabriel Feliz Maria - 2025-0742
+! VLAN 10 (Usuarios): e0/1 hacia la PC-USUARIO (VPCS) y e0/0 hacia
+! Fortinet1 port3 (puerto de acceso VLAN 10). Puertos sin uso apagados
+! en la VLAN 999. Claves de laboratorio (cambiarlas en un entorno real).
+! =====================================================================
+enable
+configure terminal
+hostname SW-A
+no ip domain-lookup
+!
+! --- VLANs ---
+vlan 10
+ name USUARIOS
+vlan 999
+ name SIN-USO
+exit
+!
+! --- Puertos ---
+interface Ethernet0/0
+ description VLAN10-Fortinet1-port3
+ switchport mode access
+ switchport access vlan 10
+ spanning-tree portfast edge
+ no shutdown
+interface Ethernet0/1
+ description PC-USUARIO
+ switchport mode access
+ switchport access vlan 10
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+ switchport port-security mac-address sticky
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+ no shutdown
+interface range Ethernet0/2 - 3
+ description SIN-USO
+ switchport mode access
+ switchport access vlan 999
+ shutdown
+exit
+!
+! --- Configuracion basica de seguridad ---
+service password-encryption
+enable secret cisco123
+banner motd #
+ SW-A - Acceso restringido. Solo personal autorizado.
+ Infraestructura 1 - VPN Site-to-Site - 2025-0742
+#
+line console 0
+ password cisco
+ login
+ logging synchronous
+ exec-timeout 10 0
+line vty 0 4
+ password cisco
+ login
+ exec-timeout 10 0
+!
+end
+write memory
