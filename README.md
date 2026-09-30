@@ -7,7 +7,9 @@
 
 ## 🎥 Video Demostrativo
 
-**[Ver demostración en YouTube](PEGAR_AQUI_EL_LINK_DEL_VIDEO)** ⚠️ *(pendiente de grabar/subir)*
+[![Ver el video en YouTube](https://img.youtube.com/vi/Cfp-Yw1Ay3Y/hqdefault.jpg)](https://youtu.be/Cfp-Yw1Ay3Y)
+
+**▶️ [Ver demostración en YouTube](https://youtu.be/Cfp-Yw1Ay3Y)**
 
 En el video se muestra la hora y fecha del sistema, el rostro y la voz del autor, y la demostración de que **el Usuario solo se comunica con el Servidor Web cuando el túnel VPN está activo**.
 
